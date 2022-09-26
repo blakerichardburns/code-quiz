@@ -70,7 +70,7 @@ button {
 }
 
 .quiz {
-    /* display: none; */
+    display: none;
 }
 
 .results {
