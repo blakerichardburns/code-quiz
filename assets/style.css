@@ -10,7 +10,7 @@ body {
     color: #F9F9FC;
 }
 
-h1, h2{
+h1, h2, h3 {
     color: #0F12F0;
     padding: 1%;
 }
@@ -23,7 +23,7 @@ p {
     color: #0e7791;
 }
 
-.page-container{
+.page-container {
     padding: 25px;
     height: 100vh;
 }
@@ -33,7 +33,7 @@ p {
     padding: 1%;
 }
 
-.header button{
+.header button {
     float: right;
     padding: 20px 20px;
     background-color: #0F12F0;

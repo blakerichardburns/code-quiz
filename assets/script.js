@@ -7,6 +7,7 @@ var quizQuestion = document.querySelector("#quiz-question");
 var quizAnswer1 = document.querySelector("#question-one");
 var quizAnswer2 = document.querySelector("#question-two");
 var quizAnswer3 = document.querySelector("#question-three");
+var feedback = document.querySelector("#feedback");
 var resultsSection = document.querySelector("#results-section");
 var scoreMessage = document.querySelector("#score-message");
 var intitalBox = document.querySelector("#initial-box");
@@ -16,6 +17,8 @@ var doOverButton = document.querySelector("#do-over");
 
 var secondsLeft = 300;
 var score = 0;
+var rightAnswer = "Correct!"
+var wrongAnswer = "Incorrect!"
 var questionsAnswers = [
     {
         question: 'In which type of file would you find a For Loop?',
@@ -54,7 +57,7 @@ function runningTimer() {
 
 function quizOver() {
     questionsSection.setAttribute("style", "display: none");
-    resultsSection.setAttribute("style", "display: flex");
+    resultsSection.setAttribute("style", "display: block");
 };
 
 beginButton.addEventListener("click", function() {
@@ -71,33 +74,66 @@ beginButton.addEventListener("click", function() {
 
 });
 
-document.querySelector("quiz-question li").addEventListener("click", function() {
+document.querySelector("quiz-question li").addEventListener("click", function(event) {
 
-    //click event Answer3 correct logs correct
-    //click event on 1 or 2 logs incorrect and subtracts time
-   
+    if (event.target == correctAnswer) {
+        score+25;
+        feedback.appendChild(rightAnswer);
+    } else {
+        secondsLeft-30;
+        feedback.appendChild(wrongAnswer);
+    }
+
+    quizQuestion.appendChild(questionsAnswers[1].question);
+    quizAnswer1.appendChild(questionsAnswers[1].possibleAnswers[0]);
+    quizAnswer2.appendChild(questionsAnswers[1].possibleAnswers[1]);
+    quizAnswer3.appendChild(questionsAnswers[1].possibleAnswers[2]);
 
 })
 
-document.querySelector("quiz-question li").addEventListener("click", function() {
+document.querySelector("quiz-question li").addEventListener("click", function(event) {
 
-    //click event Answer1 correct logs correct
-    //click event on 2 or 3 logs incorrect and subtracts time
+    if (event.target == correctAnswer) {
+        score+25;
+        feedback.appendChild(rightAnswer);
+    } else {
+        secondsLeft-30;
+        feedback.appendChild(wrongAnswer);
+    }
    
+    quizQuestion.appendChild(questionsAnswers[2].question);
+    quizAnswer1.appendChild(questionsAnswers[2].possibleAnswers[0]);
+    quizAnswer2.appendChild(questionsAnswers[2].possibleAnswers[1]);
+    quizAnswer3.appendChild(questionsAnswers[2].possibleAnswers[2]);
 
 })
 
-document.querySelector("quiz-question li").addEventListener("click", function() {
+document.querySelector("quiz-question li").addEventListener("click", function(event) {
     
-    //click event Answer2 correct logs correct
-    //click event on 1 or 3 logs incorrect and subtracts time
-   
+    if (event.target == correctAnswer) {
+        score+25;
+        feedback.appendChild(rightAnswer);
+    } else {
+        secondsLeft-30;
+        feedback.appendChild(wrongAnswer);
+    }
+ 
+    quizQuestion.appendChild(questionsAnswers[3].question);
+    quizAnswer1.appendChild(questionsAnswers[3].possibleAnswers[0]);
+    quizAnswer2.appendChild(questionsAnswers[3].possibleAnswers[1]);
+    quizAnswer3.appendChild(questionsAnswers[3].possibleAnswers[2]);
+
 })
 
-document.querySelector("quiz-question li").addEventListener("click", function() {
+document.querySelector("quiz-question li").addEventListener("click", function(event) {
     
-    //click event Answer2 correct logs correct
-    //click event on 1 or 3 logs incorrect and subtracts time
+    if (event.target == correctAnswer) {
+        score+25;
+        feedback.appendChild(rightAnswer);
+    } else {
+        secondsLeft-30;
+        feedback.appendChild(wrongAnswer);
+    }
 
     quizOver();
 })
