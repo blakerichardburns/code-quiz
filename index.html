@@ -9,43 +9,44 @@
     <body>
         <div class="page-container">
             <div class="header">
-                <timer>TIME LEFT: 0:00</timer>
-                <button>View LEADERBOARD</button>
+                <timer id="timer">TIME LEFT: </timer>
+                <button id="go-to-leaders">View LEADERBOARD</button>
             </div>
 
             <div class="quiz-container">
-                <div class="quiz-greeting">
+                <div id="quiz-greeting">
                     <h1>This is a coding quiz</h1>
-                    <button>Click here to get after it...</button>
+                    <button id="start-quiz">Click here to get after it...</button>
                 </div>
                 <div class="quiz">
-                    <div class ="questions">
-                        <h2></h2>
+                    <div id ="questions-section">
+                        <h2 id="quiz-question"></h2>
                         <ul>
-                            <li><button></button></li>
-                            <li><button></button></li>
-                            <li><button></button></li>
+                            <li id="question-one"><button></button></li>
+                            <li id="question-two"><button></button></li>
+                            <li id="question-three"><button></button></li>
                         </ul>
                     </div>
-                    <div class="results">
+                    <div id="results-section">
                         <h1>You have completed the coding quiz</h1>
-                        <p>You scored a smooth: </p>
+                        <p id="score-message"></p>
                         <div class= "logscore">    
-                            <button>Enter your initials and click here to brag</button>
-                            <input type="text">
+                            <input id="initial-box" type="text">
+                            <button id="post-score">Enter your initials and click here to brag</button>
                         </div>
                     </div>
-                    <div class="leaderboard">
+                    <div id="leaderboard">
                         <h2>Leaderboard</h2>
                         <ol>
                             <li></li>
                             <li></li>
                             <li></li>
                         </ol>
+                        <button id ="do-over">Attempt Quiz Again</button>
                     </div>
                 </div>
             </div>
         </div>
-        <script src="/assets/script.js"></script>
+        <script src="./assets/script.js"></script>
     </body>
 </html>
