@@ -62,6 +62,10 @@ p {
     margin-right: 5%;
 }
 
+.quiz ul{
+    color: #0e7791;
+}
+
 button {
     margin: 1%;
     background-color: #0e7791;
@@ -69,7 +73,7 @@ button {
     padding: 10px;
 }
 
-.quiz {
+#questions-section, #results-section, #leaderboard {
     display: none;
 }
 

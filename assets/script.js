@@ -15,30 +15,31 @@ var scoreButton = document.querySelector("#post-score");
 var leaderboardSection = document.querySelector("#leaderboard");
 var doOverButton = document.querySelector("#do-over");
 
+var currentAnswer = "";
 var secondsLeft = 300;
 var score = 0;
-var rightAnswer = "Correct!"
-var wrongAnswer = "Incorrect!"
+var rightAnswerMessage = "Correct!"
+var wrongAnswerMessage = "Incorrect!"
 var questionsAnswers = [
     {
         question: 'In which type of file would you find a For Loop?',
-        possibleAnswers: ['HTML', 'CSS', 'JavaScript'],
-        correctAnswer: 'JavaScript',
+        possibleAnswers: ['-HTML', '-CSS', '-JavaScript'],
+        correctAnswer: '-JavaScript',
     },
     {
         question: 'Which JS Function outputs a message in DevTools?',
-        possibleAnswers: ['Console Log', 'For Loop', 'Value Of'],
-        correctAnswer: 'Console Log',
+        possibleAnswers: ['-console.log', '-for Loop', '-valueOf'],
+        correctAnswer: '-Console Log',
     },
     {
         question: 'Which JavaScript Function can add functionality to a mouse click?',
-        possibleAnswers: ['Set Attribute', 'DOM Event Listener', 'Query Selector'],
-        correctAnswer: 'DOM Event Listener',
+        possibleAnswers: ['-setAttribute', '-addEventListener', '-querySelector'],
+        correctAnswer: '-addEventListener',
     },
     {
         question: 'Which function undoes browser settings that can prohibit JavaScript code from functioning correctly?',
-        possibleAnswers: ['Web API', 'Prevent Default', 'Local Storage'],
-        correctAnswer: 'Prevent Default',
+        possibleAnswers: ['-Web API', '-preventDefault', '-Local Storage'],
+        correctAnswer: '-preventDefault',
     }
 ];  
 
@@ -67,72 +68,74 @@ beginButton.addEventListener("click", function() {
     quizGreeting.setAttribute("style", "display: none");
     questionsSection.setAttribute("style","display: flex");
  
-    quizQuestion.appendChild(questionsAnswers[0].question);
-    quizAnswer1.appendChild(questionsAnswers[0].possibleAnswers[0]);
-    quizAnswer2.appendChild(questionsAnswers[0].possibleAnswers[1]);
-    quizAnswer3.appendChild(questionsAnswers[0].possibleAnswers[2]);
+    quizQuestion.textContent=questionsAnswers[0].question;
+    quizAnswer1.textContent=questionsAnswers[0].possibleAnswers[0];
+    quizAnswer2.textContent=questionsAnswers[0].possibleAnswers[1];
+    quizAnswer3.textContent=questionsAnswers[0].possibleAnswers[2];
+    currentAnswer.textContent=questionsAnswers[0].correctAnswer;
 
 });
 
-document.querySelector("quiz-question li").addEventListener("click", function(event) {
+document.querySelector("#questions-section li").addEventListener("click", function(event) {
 
-    if (event.target == correctAnswer) {
+    if (event.target == currentAnswer) {
         score+25;
-        feedback.appendChild(rightAnswer);
+        feedback.textContent=rightAnswerMessage;
     } else {
         secondsLeft-30;
-        feedback.appendChild(wrongAnswer);
+        feedback.textContent=wrongAnswerMessage;
     }
 
-    quizQuestion.appendChild(questionsAnswers[1].question);
-    quizAnswer1.appendChild(questionsAnswers[1].possibleAnswers[0]);
-    quizAnswer2.appendChild(questionsAnswers[1].possibleAnswers[1]);
-    quizAnswer3.appendChild(questionsAnswers[1].possibleAnswers[2]);
-
+    quizQuestion.textContent=questionsAnswers[1].question;
+    quizAnswer1.textContent=questionsAnswers[1].possibleAnswers[0];
+    quizAnswer2.textContent=questionsAnswers[1].possibleAnswers[1];
+    quizAnswer3.textContent=questionsAnswers[1].possibleAnswers[2];
+    currentAnswer.textContent=questionsAnswers[1].correctAnswer;
 })
 
-document.querySelector("quiz-question li").addEventListener("click", function(event) {
+document.querySelector("#questions-section li").addEventListener("click", function(event) {
 
-    if (event.target == correctAnswer) {
+    if (event.target == currentAnswer) {
         score+25;
-        feedback.appendChild(rightAnswer);
+        feedback.textContent=rightAnswerMessage;
     } else {
         secondsLeft-30;
-        feedback.appendChild(wrongAnswer);
+        feedback.textContent=wrongAnswerMessage;
     }
    
-    quizQuestion.appendChild(questionsAnswers[2].question);
-    quizAnswer1.appendChild(questionsAnswers[2].possibleAnswers[0]);
-    quizAnswer2.appendChild(questionsAnswers[2].possibleAnswers[1]);
-    quizAnswer3.appendChild(questionsAnswers[2].possibleAnswers[2]);
+    quizQuestion.textContent=questionsAnswers[2].question;
+    quizAnswer1.textContent=questionsAnswers[2].possibleAnswers[0];
+    quizAnswer2.textContent=questionsAnswers[2].possibleAnswers[1];
+    quizAnswer3.textContent=questionsAnswers[2].possibleAnswers[2];
+    currentAnswer.textContent=questionsAnswers[2].correctAnswer;
 
 })
 
-document.querySelector("quiz-question li").addEventListener("click", function(event) {
+document.querySelector("#questions-section li").addEventListener("click", function(event) {
     
-    if (event.target == correctAnswer) {
+    if (event.target == currentAnswer) {
         score+25;
-        feedback.appendChild(rightAnswer);
+        feedback.textContent=rightAnswerMessage;
     } else {
         secondsLeft-30;
-        feedback.appendChild(wrongAnswer);
+        feedback.textContent=wrongAnswerMessage;
     }
  
-    quizQuestion.appendChild(questionsAnswers[3].question);
-    quizAnswer1.appendChild(questionsAnswers[3].possibleAnswers[0]);
-    quizAnswer2.appendChild(questionsAnswers[3].possibleAnswers[1]);
-    quizAnswer3.appendChild(questionsAnswers[3].possibleAnswers[2]);
-
+    quizQuestion.textContent=questionsAnswers[3].question;
+    quizAnswer1.textContent=questionsAnswers[3].possibleAnswers[0];
+    quizAnswer2.textContent=questionsAnswers[3].possibleAnswers[1];
+    quizAnswer3.textContent=questionsAnswers[3].possibleAnswers[2];
+    currentAnswer.textContent=questionsAnswers[3].correctAnswer;
 })
 
-document.querySelector("quiz-question li").addEventListener("click", function(event) {
+document.querySelector("#questions-section li").addEventListener("click", function(event) {
     
-    if (event.target == correctAnswer) {
+    if (event.target == currentAnswer) {
         score+25;
-        feedback.appendChild(rightAnswer);
+        feedback.textContent=rightAnswerMessage;
     } else {
         secondsLeft-30;
-        feedback.appendChild(wrongAnswer);
+        feedback.textContent=wrongAnswerMessage;
     }
 
     quizOver();
