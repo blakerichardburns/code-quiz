@@ -15,6 +15,7 @@ var scoreButton = document.querySelector("#post-score");
 var leaderboardSection = document.querySelector("#leaderboard");
 var doOverButton = document.querySelector("#do-over");
 
+
 var currentAnswer = "";
 var secondsLeft = 300;
 var score = 0;
@@ -24,22 +25,22 @@ var questionsAnswers = [
     {
         question: 'In which type of file would you find a For Loop?',
         possibleAnswers: ['-HTML', '-CSS', '-JavaScript'],
-        correctAnswer: '-JavaScript',
+        correctAnswer: '-JavaScript'
     },
     {
         question: 'Which JS Function outputs a message in DevTools?',
         possibleAnswers: ['-console.log', '-for Loop', '-valueOf'],
-        correctAnswer: '-Console Log',
+        correctAnswer: '-Console Log'
     },
     {
         question: 'Which JavaScript Function can add functionality to a mouse click?',
         possibleAnswers: ['-setAttribute', '-addEventListener', '-querySelector'],
-        correctAnswer: '-addEventListener',
+        correctAnswer: '-addEventListener'
     },
     {
         question: 'Which function undoes browser settings that can prohibit JavaScript code from functioning correctly?',
         possibleAnswers: ['-Web API', '-preventDefault', '-Local Storage'],
-        correctAnswer: '-preventDefault',
+        correctAnswer: '-preventDefault'
     }
 ];  
 
@@ -66,13 +67,15 @@ beginButton.addEventListener("click", function() {
     runningTimer();
 
     quizGreeting.setAttribute("style", "display: none");
-    questionsSection.setAttribute("style","display: flex");
+    questionsSection.setAttribute("style","display: block");
  
     quizQuestion.textContent=questionsAnswers[0].question;
     quizAnswer1.textContent=questionsAnswers[0].possibleAnswers[0];
     quizAnswer2.textContent=questionsAnswers[0].possibleAnswers[1];
     quizAnswer3.textContent=questionsAnswers[0].possibleAnswers[2];
-    currentAnswer.textContent=questionsAnswers[0].correctAnswer;
+    
+    var currentAnswer = questionsAnswers[0].correctAnswer;
+
 
 });
 
@@ -90,7 +93,8 @@ document.querySelector("#questions-section li").addEventListener("click", functi
     quizAnswer1.textContent=questionsAnswers[1].possibleAnswers[0];
     quizAnswer2.textContent=questionsAnswers[1].possibleAnswers[1];
     quizAnswer3.textContent=questionsAnswers[1].possibleAnswers[2];
-    currentAnswer.textContent=questionsAnswers[1].correctAnswer;
+    
+    var currentAnswer = questionsAnswers[1].correctAnswer;
 })
 
 document.querySelector("#questions-section li").addEventListener("click", function(event) {
@@ -107,7 +111,8 @@ document.querySelector("#questions-section li").addEventListener("click", functi
     quizAnswer1.textContent=questionsAnswers[2].possibleAnswers[0];
     quizAnswer2.textContent=questionsAnswers[2].possibleAnswers[1];
     quizAnswer3.textContent=questionsAnswers[2].possibleAnswers[2];
-    currentAnswer.textContent=questionsAnswers[2].correctAnswer;
+    
+    var currentAnswer = questionsAnswers[2].correctAnswer;
 
 })
 
@@ -125,7 +130,8 @@ document.querySelector("#questions-section li").addEventListener("click", functi
     quizAnswer1.textContent=questionsAnswers[3].possibleAnswers[0];
     quizAnswer2.textContent=questionsAnswers[3].possibleAnswers[1];
     quizAnswer3.textContent=questionsAnswers[3].possibleAnswers[2];
-    currentAnswer.textContent=questionsAnswers[3].correctAnswer;
+   
+    var currentAnswer = questionsAnswers[3].correctAnswer;
 })
 
 document.querySelector("#questions-section li").addEventListener("click", function(event) {
@@ -146,7 +152,7 @@ document.querySelector("#questions-section li").addEventListener("click", functi
      //click event logs initials and score to leaderboard
 
     resultsSection.setAttribute("style", "display: none");
-     leaderboardSection.setAttribute("style", "display: flex");
+     leaderboardSection.setAttribute("style", "display: block");
  } 
 
 doOverButton.addEventListener("click", function() {
@@ -158,6 +164,6 @@ leaderButton.addEventListener("click", function() {
     quizGreeting.setAttribute("style", "display: none");
     questionsSection.setAttribute("style", "display: none");
     resultsSection.setAttribute("style", "display: none");
-    leaderboardSection.setAttribute("style", "display: flex");
+    leaderboardSection.setAttribute("style", "display: block");
 
 })

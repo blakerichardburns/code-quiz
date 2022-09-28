@@ -15,6 +15,14 @@ h1, h2, h3 {
     padding: 1%;
 }
 
+h1 {
+    font-size: 450%;
+}
+
+h2 {
+    font-size: 200%;
+}
+
 li {
     list-style: none;
 }
@@ -23,19 +31,30 @@ p {
     color: #0e7791;
 }
 
+button {
+    margin: 1%;
+    background-color: #0e7791;
+    color: #F9F9FC;
+    padding: 1.5%;
+    font-size: 150%;
+}
+
 .page-container {
     padding: 25px;
     height: 100vh;
 }
 
 .header {
+    display: inline;
     font-size: 250%;
     padding: 1%;
 }
 
 .header button {
-    float: right;
-    padding: 20px 20px;
+    position: absolute;
+    left: 85%;
+    bottom: 90%;
+    padding: 0.5%;
     background-color: #0F12F0;
     color: #F9F9FC;
     font-weight: bold;
@@ -55,22 +74,24 @@ p {
     text-align: center;
 }
 
-#quiz-greeting {
+.quiz {
     margin-top: 25%;
     margin-bottom: 5%;
     margin-left: 5%;
     margin-right: 5%;
 }
 
-.quiz ul{
+.quiz ul {
     color: #0e7791;
+    font-size: 300%;
+    text-align: center;
 }
 
-button {
-    margin: 1%;
-    background-color: #0e7791;
-    color: #F9F9FC;
-    padding: 10px;
+#quiz-greeting {
+    margin-top: 25%;
+    margin-bottom: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 #questions-section, #results-section, #leaderboard {
