@@ -1,27 +1,17 @@
 # code-quiz
+Module 4 Challenge: Web APIs
 
-Published site: https://blakerichardburns.github.io/code-quiz/
+![Alt text](./assets/screenshot.JPG "Screenshot")
 
-Github: https://github.com/blakerichardburns/code-quiz
+## Live Link
+https://blakerichardburns.github.io/code-quiz/
 
-Screenshot: https://user-images.githubusercontent.com/111099915/192421050-b761c04e-08fd-4eb0-8e88-3df973c4c697.png
+## Repository Link
+https://github.com/blakerichardburns/code-quiz
 
 ## Description
-Week 4 Challenge: Web APIs
 Intended to test skills involving JavaScript interactive functionality and Web APIs.
 
-## Installation
-
-N/A
-
-## Usage
-
-This quiz will assess the user on practical knowledge of JavaScript fundamentals.
-
-## Credits
-
-N/A
-
-## License
-
-Please refer to the LICENSE in the repo.
+## Questions
+For any inquiries, spam by inbox here: blakerichardburns@gmail.com <br>
+To peruse more of my portfolio, check this out: [blakerichardburns](https://github.com/blakerichardburns)
