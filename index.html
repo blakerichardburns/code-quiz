@@ -1,53 +1,35 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Coding Quiz</title>
-        <meta charset="UTF-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="stylesheet" type="text/css" href="./assets/style.css"/>
-    </head>
-    <body>
-        <div class="page-container">
-            <div class="header">
-                <timer id="timer">TIME LEFT: </timer>
-                <button id="go-to-leaders">View LEADERBOARD</button>
-            </div>
-
-            <div class="quiz-container">
-                <div id="quiz-greeting">
-                    <h1>This is a coding quiz</h1>
-                    <button id="start-quiz">Click here to get after it...</button>
-                </div>
-                <div class="quiz">
-                    <div id ="questions-section">
-                        <h2 id="quiz-question"></h2>
-                             <ul>
-                                <li id="question-one" class="question"><button></button></li>
-                                <li id="question-two" class="question"><button></button></li>
-                                <li id="question-three" class="question"><button></button></li>
-                            </ul>
-                        <h3 id="feedback"></h3>
-                    </div>
-                    <div id="results-section">
-                        <h1>You have completed the coding quiz</h1>
-                        <p id="score-message"></p>
-                        <div class= "logscore">    
-                            <input id="initial-box" type="text">
-                            <button id="post-score">Enter your initials and click here to brag</button>
-                        </div>
-                    </div>
-                    <div id="leaderboard">
-                        <h2>Leaderboard</h2>
-                        <ol>
-                            <li></li>
-                            <li></li>
-                            <li></li>
-                        </ol>
-                        <button id ="do-over">Attempt Quiz Again</button>
-                    </div>
-                </div>
-            </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Assets/style.css">
+    <title>Coding Quiz</title>
+</head>
+<body>
+    <header>
+        <h1>This is a Coding Quiz</h1>
+        <h2>TIME LEFT: <span id="timer"></span></h2>
+        <button id="start-quiz-button">Click Here to get after it...</button>
+    </header>
+    <section>
+        <h1 id="quiz-question"></h1>
+        <ul class="answers-list"></ul>
+        <h3 id="answer-feedback"></h3>
+    </section>
+    <section id="results-section">
+        <h1 id="end-quiz-message">
+            You have completed the coding quiz <br>
+            POST YOUR SCORE
+        </h1>
+        <div id="post-score-section">
+            <input type="text" id="initials-input-form" maxlength="3" placeholder="Initials">
+            <button id="post-score-button">Enter your initials and click here to brag...</button>
         </div>
-        <script src="./assets/script.js"></script>
-    </body>
+        <ul id="leaderboard"></ul>
+    </section>
+
+    <script src="Assets/script.js"></script>
+</body>
 </html>
