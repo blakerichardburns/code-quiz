@@ -158,20 +158,22 @@ function displayScoresList(scoresList) {
   leaderboard.setAttribute('style', 'display: block');
 }
 
-// leaderboardButton.addEventListener('click', viewLeaderboard);
+leaderboardButton.addEventListener('click', viewLeaderboard);
 
-// function viewLeaderboard() {
-//   var scoresList = localStorage.getItem('scoresList');
+function viewLeaderboard() {
+  resultsSection.setAttribute('style', 'display:block');
+  postScoreSection.setAttribute('style', 'display: none;');
+  var scoresList = localStorage.getItem('scoresList');
 
-//   if (scoresList === null) {
-//     scoresList.textContent = 'No scores yet, finishing the quiz is a guaranteed high score!';
-//   } else {
-//     scoresList = JSON.parse(scoresList);
-//   }
+  if (scoresList === null) {
+    quizOverMessage.textContent = 'No scores yet, finishing the quiz is a guaranteed high score!';
+  } else {
+    scoresList = JSON.parse(scoresList);
+  }
 
-//   scoresList = scoresList.sort(function (a, b) {
-//     return b.score - a.score;
-//   });
+  scoresList = scoresList.sort(function (a, b) {
+    return b.score - a.score;
+  });
   
-//   displayScoresList(scoresList);
-// }
+  displayScoresList(scoresList);
+}
