@@ -1,166 +1,157 @@
+var beginButton = document.querySelector('#start-quiz-button');
 var timer = document.querySelector('#timer');
-var leaderButton = document.querySelector('#go-to-leaders');
-var quizGreeting = document.querySelector('#quiz-greeting');
-var beginButton = document.querySelector('#start-quiz');
-var questionsSection = document.querySelector('#questions-section');
+var timeLeft;
+var TIMER_START_SECONDS = 60;
+var timerInterval;
 var quizQuestion = document.querySelector('#quiz-question');
-var quizAnswer1 = document.querySelector('#question-one');
-var quizAnswer2 = document.querySelector('#question-two');
-var quizAnswer3 = document.querySelector('#question-three');
-var feedback = document.querySelector('#feedback');
+var answersList = document.querySelector('.answers-list');
+var answerFeedback = document.querySelector('#answer-feedback');
+var postScoreSection = document.querySelector('#post-score-section');
+var initialsInput = document.querySelector('#initials-input-form');
+var postScoreButton = document.querySelector('#post-score-button');
+var quizOverMessage = document.querySelector('#end-quiz-message');
 var resultsSection = document.querySelector('#results-section');
-var scoreMessage = document.querySelector('#score-message');
-var intitalBox = document.querySelector('#initial-box');
-var scoreButton = document.querySelector('#post-score');
-var leaderboardSection = document.querySelector('#leaderboard');
-var doOverButton = document.querySelector('#do-over');
+var leaderboard = document.querySelector('#leaderboard');
 
-var currentAnswer = '';
-var secondsLeft = 300;
-var score = 0;
-var rightAnswerMessage = 'Correct!';
-var wrongAnswerMessage = 'Incorrect!';
-var questionsAnswers = [
-  {
-    question: 'In which type of file would you find a For Loop?',
-    possibleAnswers: ['-HTML', '-CSS', '-JavaScript'],
-    correctAnswer: '-JavaScript',
-  },
-  {
-    question: 'Which JS Function outputs a message in DevTools?',
-    possibleAnswers: ['-console.log', '-for Loop', '-valueOf'],
-    correctAnswer: '-Console Log',
-  },
-  {
-    question:
-      'Which JavaScript Function can add functionality to a mouse click?',
-    possibleAnswers: ['-setAttribute', '-addEventListener', '-querySelector'],
-    correctAnswer: '-addEventListener',
-  },
-  {
-    question:
-      'Which function undoes browser settings that can prohibit JavaScript code from functioning correctly?',
-    possibleAnswers: ['-Web API', '-preventDefault', '-Local Storage'],
-    correctAnswer: '-preventDefault',
-  },
+var questionsAndAnswersArray = [
+    {
+        question: 'In which type of file would you find a For Loop?',
+        answerOptions: [
+            '-HTML',
+            '-CSS',
+            '-JavaScript'
+        ],
+        correctAnswer: '-JavaScript'
+    },
+    {
+        question: 'Which JS Function outputs a message in DevTools?',
+        answerOptions: [
+            '-console.log',
+            '-for Loop',
+            '-valueOf'],
+        correctAnswer: '-console.log'
+    },
+    {
+        question: 'Which JavaScript Function can add functionality to a mouse click?',
+        answerOptions: ['-setAttribute', '-addEventListener', '-querySelector'],
+        correctAnswer: '-addEventListener'
+    },
+    {
+        question: 'Which function undoes browser settings that can prohibit JavaScript code from functioning correctly?',
+        answerOptions: ['-Web API', '-preventDefault', '-Local Storage'],
+        correctAnswer: '-preventDefault'
+    },
 ];
 
+beginButton.addEventListener('click', quiz);
+
 function runningTimer() {
-  var timerInterval = setInterval(function () {
-    secondsLeft--;
-    timer.textContent = 'TIME LEFT: ' + secondsLeft;
+    timeLeft = TIMER_START_SECONDS;
+    timer.textContent = timeLeft;
 
-    if (secondsLeft === 0) {
-      clearInterval(timerInterval);
-      quizOver();
+    timerInterval = setInterval(function() {
+        if (timeLeft > 0) {
+            timeLeft--;
+            timer.textContent = timeLeft;
+        } else {
+            quizOver();
+        }
+    }, 1000);
+};
+
+function quiz() {
+    beginButton.setAttribute('style', 'display: none;');
+    resultsSection.setAttribute('style', 'display:none;');
+
+    runningTimer();
+    nextQuestion(0);
+};
+
+function nextQuestion (questionIndex) {
+    if (questionIndex >= questionsAndAnswersArray.length) {
+        quizOver();
+        return;
     }
-  }, 1000);
+    answersList.innerHTML = '';
+    var currentQuestion = questionsAndAnswersArray[questionIndex];
+    quizQuestion.textContent = currentQuestion.question;
+
+    for (var i = 0; i <currentQuestion.answerOptions.length; i++) {
+        var liElement = document.createElement('li');
+        liElement.textContent = currentQuestion.answerOptions[i];
+
+        liElement.addEventListener('click', function(event) {
+            if (event.target.textContent === currentQuestion.correctAnswer) {
+                timeLeft += 10;
+                timer.textContent = timeLeft;
+                answerFeedback.textContent = "Correct! +10"
+            } else {
+                timeLeft -= 10;
+                timer.textContent = timeLeft;
+                answerFeedback.textContent = "Incorrect! -10"
+            }
+
+            nextQuestion(questionIndex + 1);
+        });
+
+        answersList.appendChild(liElement);
+    }
+};
+
+function quizOver () {
+    quizQuestion.textContent = '';
+    answersList.innerHTML = '';
+    beginButton.setAttribute('style', 'display: block;');
+    beginButton.textContent = 'Try Quiz Again';
+    postScoreSection.setAttribute('style', 'display: block;');
+    resultsSection.setAttribute('style', 'display:block');
+    leaderboard.setAttribute('style', 'display: none');
+    clearInterval(timerInterval);
 }
+postScoreButton.addEventListener('click', postScore);
 
-function quizOver() {
-  questionsSection.setAttribute('style', 'display: none');
-  resultsSection.setAttribute('style', 'display: block');
+function postScore() {
+    var userInitials = initialsInput.value;
+
+    if (userInitials.length !== 3) {
+        quizOverMessage.textContent = 'Please input 3 letters for your initials'
+        return;
+    }
+
+    var scoresList = localStorage.getItem('scoresList');
+
+    if (scoresList === null) {
+        scoresList = [];
+    } else {
+        scoresList = JSON.parse(scoresList);
+    }
+
+    scoresList.push({
+        initials: userInitials,
+        score: timeLeft
+    });
+
+    scoresList = scoresList.sort(function (a, b) {
+        return b.score - a.score;
+    });
+
+    localStorage.setItem('scoresList', JSON.stringify(scoresList));
+
+    displayScoresList(scoresList);
+
+    initialsInput.value = '';
+    postScoreSection.setAttribute('style', 'display: none;');
+};
+
+function displayScoresList(scoresList) {
+    leaderboard.innerHTML = '';
+    for (var i = 0; i < scoresList.length; i++) {
+        var currentScore = scoresList[i];
+        var liElement = document.createElement('li');
+        liElement.textContent = `${currentScore.initials}: ${currentScore.score}`;
+
+        leaderboard.appendChild(liElement);
+    }
+
+    leaderboard.setAttribute('style', 'display: block');
 }
-
-beginButton.addEventListener('click', function () {
-  runningTimer();
-
-  quizGreeting.setAttribute('style', 'display: none');
-  questionsSection.setAttribute('style', 'display: block');
-
-  quizQuestion.textContent = questionsAnswers[0].question;
-  quizAnswer1.textContent = questionsAnswers[0].possibleAnswers[0];
-  quizAnswer2.textContent = questionsAnswers[0].possibleAnswers[1];
-  quizAnswer3.textContent = questionsAnswers[0].possibleAnswers[2];
-
-  var currentAnswer = questionsAnswers[0].correctAnswer;
-});
-
-document
-  .querySelector('#questions-section li')
-  .addEventListener('click', function (event) {
-    if (event.target == currentAnswer) {
-      score + 25;
-      feedback.textContent = rightAnswerMessage;
-    } else {
-      secondsLeft - 30;
-      feedback.textContent = wrongAnswerMessage;
-    }
-
-    quizQuestion.textContent = questionsAnswers[1].question;
-    quizAnswer1.textContent = questionsAnswers[1].possibleAnswers[0];
-    quizAnswer2.textContent = questionsAnswers[1].possibleAnswers[1];
-    quizAnswer3.textContent = questionsAnswers[1].possibleAnswers[2];
-
-    var currentAnswer = questionsAnswers[1].correctAnswer;
-  });
-
-document
-  .querySelector('#questions-section li')
-  .addEventListener('click', function (event) {
-    if (event.target == currentAnswer) {
-      score + 25;
-      feedback.textContent = rightAnswerMessage;
-    } else {
-      secondsLeft - 30;
-      feedback.textContent = wrongAnswerMessage;
-    }
-
-    quizQuestion.textContent = questionsAnswers[2].question;
-    quizAnswer1.textContent = questionsAnswers[2].possibleAnswers[0];
-    quizAnswer2.textContent = questionsAnswers[2].possibleAnswers[1];
-    quizAnswer3.textContent = questionsAnswers[2].possibleAnswers[2];
-
-    var currentAnswer = questionsAnswers[2].correctAnswer;
-  });
-
-document
-  .querySelector('#questions-section li')
-  .addEventListener('click', function (event) {
-    if (event.target == currentAnswer) {
-      score + 25;
-      feedback.textContent = rightAnswerMessage;
-    } else {
-      secondsLeft - 30;
-      feedback.textContent = wrongAnswerMessage;
-    }
-
-    quizQuestion.textContent = questionsAnswers[3].question;
-    quizAnswer1.textContent = questionsAnswers[3].possibleAnswers[0];
-    quizAnswer2.textContent = questionsAnswers[3].possibleAnswers[1];
-    quizAnswer3.textContent = questionsAnswers[3].possibleAnswers[2];
-
-    var currentAnswer = questionsAnswers[3].correctAnswer;
-  });
-
-document
-  .querySelector('#questions-section li')
-  .addEventListener('click', function (event) {
-    if (event.target == currentAnswer) {
-      score + 25;
-      feedback.textContent = rightAnswerMessage;
-    } else {
-      secondsLeft - 30;
-      feedback.textContent = wrongAnswerMessage;
-    }
-
-    quizOver();
-  });
-
-function addScore() {
-  //click event logs initials and score to leaderboard
-
-  resultsSection.setAttribute('style', 'display: none');
-  leaderboardSection.setAttribute('style', 'display: block');
-}
-
-doOverButton.addEventListener('click', function () {
-  return;
-});
-
-leaderButton.addEventListener('click', function () {
-  quizGreeting.setAttribute('style', 'display: none');
-  questionsSection.setAttribute('style', 'display: none');
-  resultsSection.setAttribute('style', 'display: none');
-  leaderboardSection.setAttribute('style', 'display: block');
-});
