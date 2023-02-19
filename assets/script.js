@@ -103,7 +103,8 @@ function quizOver() {
   beginButton.textContent = 'Want a better score? Click Here';
   postScoreSection.setAttribute('style', 'display: block;');
   resultsSection.setAttribute('style', 'display:block');
-  quizOverMessage.textContent = 'You have completed the coding quiz! POST YOUR SCORE';
+  quizOverMessage.textContent =
+    'You have completed the coding quiz! POST YOUR SCORE';
   leaderboard.setAttribute('style', 'display: none');
   clearInterval(timerInterval);
 }
@@ -141,7 +142,6 @@ function postScore() {
   displayScoresList(scoresList);
   initialsInput.value = '';
   postScoreSection.setAttribute('style', 'display: none;');
-
 }
 
 function displayScoresList(scoresList) {
@@ -166,7 +166,8 @@ function viewLeaderboard() {
   var scoresList = localStorage.getItem('scoresList');
 
   if (scoresList === null) {
-    quizOverMessage.textContent = 'No scores yet, finishing the quiz is a guaranteed high score!';
+    quizOverMessage.textContent =
+      'No scores yet, finishing the quiz is a guaranteed high score!';
   } else {
     scoresList = JSON.parse(scoresList);
   }
@@ -174,6 +175,6 @@ function viewLeaderboard() {
   scoresList = scoresList.sort(function (a, b) {
     return b.score - a.score;
   });
-  
+
   displayScoresList(scoresList);
 }
