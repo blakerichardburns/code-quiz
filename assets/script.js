@@ -3,6 +3,7 @@ var timer = document.querySelector('#timer');
 var timeLeft;
 var TIMER_START_SECONDS = 60;
 var timerInterval;
+var quizSection = document.querySelector('.quiz-container');
 var quizQuestion = document.querySelector('#quiz-question');
 var answersList = document.querySelector('.answers-list');
 var answerFeedback = document.querySelector('#answer-feedback');
@@ -56,6 +57,7 @@ function runningTimer() {
 
 function quiz() {
   beginButton.setAttribute('style', 'display: none;');
+  answerFeedback.textContent = '';
   resultsSection.setAttribute('style', 'display:none;');
 
   runningTimer();
@@ -97,19 +99,21 @@ function quizOver() {
   quizQuestion.textContent = '';
   answersList.innerHTML = '';
   beginButton.setAttribute('style', 'display: block;');
-  beginButton.textContent = 'Try Quiz Again';
+  beginButton.textContent = 'Want a better score? Click Here';
   postScoreSection.setAttribute('style', 'display: block;');
   resultsSection.setAttribute('style', 'display:block');
   leaderboard.setAttribute('style', 'display: none');
   clearInterval(timerInterval);
 }
+
 postScoreButton.addEventListener('click', postScore);
 
 function postScore() {
+  answerFeedback.textContent = '';
   var userInitials = initialsInput.value;
 
   if (userInitials.length !== 3) {
-    quizOverMessage.textContent = 'Please input 3 letters for your initials';
+    quizOverMessage.textContent = 'Input exaclty 3 letters.';
     return;
   }
 
@@ -133,9 +137,9 @@ function postScore() {
   localStorage.setItem('scoresList', JSON.stringify(scoresList));
 
   displayScoresList(scoresList);
-
   initialsInput.value = '';
   postScoreSection.setAttribute('style', 'display: none;');
+
 }
 
 function displayScoresList(scoresList) {

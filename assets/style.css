@@ -22,12 +22,22 @@ body {
     background-color: #0e7791;
     color: #F9F9FC;
     height: 100vh;
-    padding: 2%;
+
 }
 
 header {
     display: inline;
+    color: #0F12F0;
     font-size: 150%;
+}
+
+header h2 {
+    margin-top: 2.5%;
+    margin-left: 2.5%;
+}
+
+#timer {
+    color: #F9F9FC;
 }
 
 #page-title {
@@ -40,7 +50,8 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: start;
-    height: 100%;
+    flex-grow: 5;
+    height: 100vh;
     width: 65%;
     margin: 0 auto;
     padding-top: 10%;
@@ -55,6 +66,7 @@ button {
     color: #F9F9FC;
     padding: 1.5%;
     font-size: 150%;
+    border-radius: 25%;
     cursor: pointer;
 }
 
@@ -74,6 +86,7 @@ ul.answers-list {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-bottom: 5%;
     padding: 1%;
     color: #0e7791;
     font-size: 275%;
