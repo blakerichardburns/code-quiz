@@ -3,6 +3,7 @@ var timer = document.querySelector('#timer');
 var timeLeft;
 var TIMER_START_SECONDS = 60;
 var timerInterval;
+var leaderboardButton = document.querySelector('#leaderboardButton');
 var quizSection = document.querySelector('.quiz-container');
 var quizQuestion = document.querySelector('#quiz-question');
 var answersList = document.querySelector('.answers-list');
@@ -102,6 +103,7 @@ function quizOver() {
   beginButton.textContent = 'Want a better score? Click Here';
   postScoreSection.setAttribute('style', 'display: block;');
   resultsSection.setAttribute('style', 'display:block');
+  quizOverMessage.textContent = 'You have completed the coding quiz! POST YOUR SCORE';
   leaderboard.setAttribute('style', 'display: none');
   clearInterval(timerInterval);
 }
@@ -143,6 +145,7 @@ function postScore() {
 }
 
 function displayScoresList(scoresList) {
+  quizOverMessage.textContent = 'High Scores:';
   leaderboard.innerHTML = '';
   for (var i = 0; i < scoresList.length; i++) {
     var currentScore = scoresList[i];
@@ -154,3 +157,21 @@ function displayScoresList(scoresList) {
 
   leaderboard.setAttribute('style', 'display: block');
 }
+
+// leaderboardButton.addEventListener('click', viewLeaderboard);
+
+// function viewLeaderboard() {
+//   var scoresList = localStorage.getItem('scoresList');
+
+//   if (scoresList === null) {
+//     scoresList.textContent = 'No scores yet, finishing the quiz is a guaranteed high score!';
+//   } else {
+//     scoresList = JSON.parse(scoresList);
+//   }
+
+//   scoresList = scoresList.sort(function (a, b) {
+//     return b.score - a.score;
+//   });
+  
+//   displayScoresList(scoresList);
+// }
